@@ -15,25 +15,25 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
     },
 
     {
       path: '/about',
       name: 'about',
-      component: About
+      component: About,
     },
 
     {
       path: '/coin/:id',
       name: 'coin-detail',
-      component: CoinDetail
+      component: CoinDetail,
     },
 
     {
       path: '*',
       name: 'error',
-      component: Error
-    }
-  ]
+      component: Error,
+    },
+  ],
 })
