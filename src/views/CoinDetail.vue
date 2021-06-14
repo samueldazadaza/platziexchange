@@ -40,7 +40,7 @@
             </li>
             <li class="flex justify-between">
               <b class="text-gray-600 mr-10 uppercase">Variación 24hs</b>
-              <span></span>
+              <span>{{ asset.changePercent24Hr | percent}}</span>
             </li>
           </ul>
         </div>
@@ -68,8 +68,9 @@
 </template>
 
 <script>
+import  api from '@/api'
 export default {
-  name: 'CoinDetail'
+  name: 'CoinDetail',
 
   data() {
     return {
@@ -78,14 +79,15 @@ export default {
   },
 
   created () {
-
+    this.getCoin()
   },
 
   methods: {
     getCoin () {
-      
-    }
+        const id = this.$route.params.id
+        api.getAsset(id)
+          .then(asset => this.asset = asset)
+      }
   }
-
 }
 </script>

@@ -6,7 +6,7 @@ function getAssets() {
         .then(res => res.data)
 }
  
-function getAssets(coin) {
+function getAsset(coin) {
   return fetch(`${url}/assets/${coin}`)
   .then(res => res.json())
   .then(res => res.data)
