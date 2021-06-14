@@ -113,9 +113,7 @@ export default {
     },
 
     avg() {
-      return Math.abs(
-        ... this.history.map (h => parseFloat(h.priceUsd).toFixed(2))
-      )
+     return this.history.reduce((a, b) => a + parseFloat(b.priceUsd), 0) / this.history.length
     },
   },
 
