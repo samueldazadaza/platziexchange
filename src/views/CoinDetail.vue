@@ -32,15 +32,15 @@
             </li>
             <li class="flex justify-between">
               <b class="text-gray-600 mr-10 uppercase">Precio más alto</b>
-              <span>{{ max | dollar }}</span>
+              <span></span>
             </li>
             <li class="flex justify-between">
               <b class="text-gray-600 mr-10 uppercase">Precio Promedio</b>
-              <span>{{ avg | dollar }}</span>
+              <span></span>
             </li>
             <li class="flex justify-between">
               <b class="text-gray-600 mr-10 uppercase">Variación 24hs</b>
-              <span>{{ asset.changePercent24Hr | percent }}</span>
+              <span></span>
             </li>
           </ul>
         </div>
@@ -68,61 +68,24 @@
 </template>
 
 <script>
-import api from '@/api'
-
 export default {
-  name: 'CoinDetail',
+  name: 'CoinDetail'
 
   data() {
     return {
-      asset: {},
-      history: []
+      asset: {}
     }
   },
 
-  computed: {
-    min() {
-      return Math.min(
-        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
-      )
-    },
+  created () {
 
-    max() {
-      return Math.max(
-        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
-      )
-    },
-
-    avg() {
-      return Math.abs(
-        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
-      )
-    }
-  },
-
-  created() {
-    this.getCoin()
   },
 
   methods: {
-    getCoin() {
-      const id = this.$route.params.id
-
-      Promise.all([api.getAsset(id), api.getAssetHistory(id)]).then(
-        ([asset, history]) => {
-          this.asset = asset
-          this.history = history
-        }
-      )
+    getCoin () {
+      
     }
   }
+
 }
 </script>
-
-<style scoped>
-td {
-  padding: 10px;
-  text-align: center;
-}
-</style>
-
