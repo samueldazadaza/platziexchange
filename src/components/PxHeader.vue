@@ -1,7 +1,7 @@
 <template>
   <header class="shadow w-screen">
     <nav>
-      <nav class="flex items-center justify-between flex-wrap bg-blue-500 p-6">
+      <nav class="flex items-center justify-between flex-wrap p-6 bg-gradient-to-b from-blue-500 via-green-400 to-blue-500">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
           <px-icon class="mr-2" />
           <router-link
