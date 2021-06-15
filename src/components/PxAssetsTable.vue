@@ -22,20 +22,23 @@
         <td>
           <img
             class="w-6 h-6"
-            :src="`https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`"
+            :src="
+              `https://static.coincap.io/assets/icons/${a.symbol.toLowerCase()}@2x.png`
+            "
             :alt="a.name"
           />
         </td>
         <td>
-          <b>#{{ a.rank }}</b>
+          <b># {{ a.rank }}</b>
         </td>
         <td>
           <router-link
             class="hover:underline text-green-600"
             :to="{ name: 'coin-detail', params: { id: a.id } }"
-            >{{ a.name }}</router-link>
+            >{{ a.name }}</router-link
+          >
           <small class="ml-1 text-gray-500">{{ a.symbol }}</small>
-          </td>
+        </td>
         <td>{{ a.priceUsd | dollar }}</td>
         <td>{{ a.marketCapUsd | dollar }}</td>
         <td
@@ -63,18 +66,18 @@ import PxButton from '@/components/PxButton'
 export default {
   name: 'PxAssetsTable',
 
-  components: { PxButton},
+  components: { PxButton },
 
   props: {
     assets: {
       type: Array,
-      default: () => [],
-    },
+      default: () => []
+    }
   },
 
   methods: {
     goToCoin(id) {
-      this.$router.push({ name: 'coin-detail', params: { id }})
+      this.$router.push({ name: 'coin-detail', params: { id } })
     }
   }
 }
