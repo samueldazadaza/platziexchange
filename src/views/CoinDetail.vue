@@ -84,10 +84,14 @@
           <td> {{ m.priceUsd | dollar }} </td>
           <td> {{ m.baseSymbol }} / {{ m.quoteSymbol }} </td>
           <td>
-            <px-button @custom-click="getWebSite(m)" >
+            <px-button :is-loading="m.isLoading || false"
+              v-if="!m.url"
+              @custom-click="getWebSite(m)" >
               <slot>Obtener Link</slot>
               </px-button>
-            <a class="hover:underline text-green-600" target="_blanck"></a>
+            <a v-else class="hover:underline text-green-600" target="_blanck">
+              {{ m.url}}
+            </a>
           </td>
         </tr>
       </table>
@@ -140,9 +144,14 @@ export default {
 
   methods: {
     getWebSite (exchange) {
-      return api.getExchange(exchange.exchangeId)
-      .then(res => {
-        exchange.url = res.exchangeUrl
+      this.$set(exchange, 'isLoading', true)
+
+
+      return api.getExchange(exchange.exchangeId).then(res => {
+        this.$set(exchange, 'url', res.exchangeUrl)
+      })
+      .finally(() => {
+              this.$set(exchange, 'isLoading', false)
       })
     },
 
@@ -150,7 +159,11 @@ export default {
       const id = this.$route.params.id
       this.isLoading = true
 
-      Promise.all([api.getAsset(id), api.getAssetHistory(id), api.getMarkets(id)])
+      Promise.all([
+        api.getAsset(id),
+        api.getAssetHistory(id),
+        api.getMarkets(id)
+        ])
         .then(([asset, history, markets]) => {
           this.asset = asset
           this.history = history
