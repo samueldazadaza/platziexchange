@@ -1,5 +1,9 @@
 # 33platziexchange
 
+_______
+Live server: https://precio-cryptos.netlify.app/
+_______
+
 ## Project setup
 ```
 npm install
